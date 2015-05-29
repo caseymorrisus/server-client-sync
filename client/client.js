@@ -3,7 +3,7 @@ var fs = require('fs');
 
 // Create a socket (client) that connects to the server
 var socket = new net.Socket();
-socket.connect(3000, "localhost", function () {
+socket.connect(3000, 'localhost', function () {
 	console.log("Client: Connected to server");
 });
 
@@ -15,7 +15,7 @@ socket.on("data", function (data) {
 
 	if (data.content) {
 		//console.log("Data from server: " + data.content);
-		fs.writeFile('client_test.txt', data.content, function (err) {
+		fs.writeFile(data.filename, data.content, function (err) {
 			if (err) throw err;
 			console.log("Client: Saved file.");
 		})
