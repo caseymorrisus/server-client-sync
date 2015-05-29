@@ -9,16 +9,18 @@ socket.connect(3000, "localhost", function () {
 
 // Let's handle the data we get from the server
 socket.on("data", function (data) {
+
 	data = JSON.parse(data);
-	console.log("Response from server: %s", data.response);
-	if (data.data) {
-		console.log("Data from server: " + data.data);
-		fs.writeFile('client_test.txt', data.data, function (err) {
+	console.log("Server: %s", data.message);
+
+	if (data.content) {
+		//console.log("Data from server: " + data.content);
+		fs.writeFile('client_test.txt', data.content, function (err) {
 			if (err) throw err;
 			console.log("Client: Saved file.");
 		})
 	};
 	// Respond back
-	//socket.write(JSON.stringify({ response: "Hey there server!" }));
+	//socket.write(JSON.stringify({ message: "Hey there server!" }));
 	// Close the connection
 });
